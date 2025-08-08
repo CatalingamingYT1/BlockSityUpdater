@@ -33,6 +33,7 @@
             box-shadow: 0 0 40px rgba(0, 184, 255, 0.3);
             animation: pulse 8s infinite alternate;
             position: relative;
+            overflow: hidden;
         }
         
         @keyframes pulse {
@@ -46,57 +47,92 @@
             margin-bottom: 30px;
             font-size: 2.5rem;
             text-shadow: 0 0 15px rgba(0, 184, 255, 0.5);
+            position: relative;
+            z-index: 2;
         }
         
-        .config-item {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
+        .config-display {
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
             border-left: 3px solid var(--primary);
+        }
+        
+        .config-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
             text-align: left;
         }
         
         .config-label {
             color: var(--primary);
             font-weight: bold;
-            margin-bottom: 5px;
+            min-width: 120px;
         }
         
-        .floating {
-            animation: floating 6s ease-in-out infinite;
+        .config-value {
+            color: white;
+            word-break: break-all;
         }
         
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.3;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        .note {
+            margin-top: 30px;
+            color: #777;
+            font-style: italic;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
         }
     </style>
 </head>
 <body>
-    <div class="container floating">
-        <h1>BLOCKSITY RP CONFIG</h1>
+    <div class="container">
+        <!-- Floating particles -->
+        <div class="particle" style="width: 100px; height: 100px; top: -50px; left: -50px; animation-duration: 15s;"></div>
+        <div class="particle" style="width: 60px; height: 60px; bottom: -30px; right: -30px; animation-duration: 20s;"></div>
+        <div class="particle" style="width: 30px; height: 30px; top: 30%; right: 20%; animation-duration: 25s;"></div>
         
-        <div class="config-item">
-            <div class="config-label">Application ID</div>
-            <div>1330086295401267301</div>
-        </div>
+        <h1>BLOCKSITY RP</h1>
         
-        <div class="config-item">
-            <div class="config-label">Status</div>
-            <div>Playing BlockSity</div>
-        </div>
-        
-        <div class="config-item">
-            <div class="config-label">Images</div>
-            <div>Large: blocksity.png</div>
-            <div>Small: discord.png</div>
-        </div>
-        
-        <div class="config-item">
-            <div class="config-label">Button</div>
-            <div>Join Discord (discord.gg/R9NVsy6dyx)</div>
+        <div class="config-display">
+            <div class="config-row">
+                <span class="config-label">Application ID:</span>
+                <span class="config-value">1330086295401267301</span>
+            </div>
+            <div class="config-row">
+                <span class="config-label">Status:</span>
+                <span class="config-value">Playing BlockSity</span>
+            </div>
+            <div class="config-row">
+                <span class="config-label">Large Image:</span>
+                <span class="config-value">blocksity.png</span>
+            </div>
+            <div class="config-row">
+                <span class="config-label">Small Image:</span>
+                <span class="config-value">discord.png</span>
+            </div>
+            <div class="config-row">
+                <span class="config-label">Button:</span>
+                <span class="config-value">Join Discord (discord.gg/R9NVsy6dyx)</span>
+            </div>
         </div>
 
         <script id="rp-config" type="application/json">
@@ -116,6 +152,8 @@
                 ]
             }
         </script>
+        
+        <p class="note">Edit configuration via GitHub repository</p>
     </div>
 </body>
 </html>
