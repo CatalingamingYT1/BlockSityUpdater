@@ -12,30 +12,28 @@
         
         body {
             margin: 0;
-            padding: 0;
+            padding: 20px;
             background: var(--dark);
             color: white;
             font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
         
         .container {
             background: var(--light);
             padding: 30px;
             border-radius: 15px;
-            width: 90%;
+            width: 100%;
             max-width: 600px;
             box-shadow: 0 0 30px rgba(0, 184, 255, 0.2);
-            animation: pulse 6s infinite alternate;
+            animation: pulse 6s infinite;
         }
         
         @keyframes pulse {
             0% { box-shadow: 0 0 30px rgba(0, 184, 255, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(136, 50, 168, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(136, 50, 168, 0.4); }
             100% { box-shadow: 0 0 30px rgba(0, 184, 255, 0.2); }
         }
         
@@ -43,18 +41,6 @@
             color: var(--primary);
             text-align: center;
             margin-bottom: 30px;
-            position: relative;
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 3px;
         }
         
         .form-group {
@@ -70,25 +56,18 @@
         input, textarea, select {
             width: 100%;
             padding: 12px;
-            border: 1px solid rgba(0, 184, 255, 0.3);
+            border: 2px solid rgba(0, 184, 255, 0.3);
             border-radius: 8px;
             background: rgba(0, 0, 0, 0.2);
             color: white;
             font-size: 16px;
-            transition: all 0.3s;
-        }
-        
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(0, 184, 255, 0.3);
         }
         
         button {
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 14px 28px;
+            padding: 14px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
@@ -99,36 +78,26 @@
         }
         
         button:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 184, 255, 0.4);
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="floating">BLOCKSITY RP CONFIG</h1>
+        <h1>🔧 BLOCKSITY RP CONFIG</h1>
         
         <div class="form-group">
-            <label for="state">Status Text:</label>
+            <label for="state">STATUS TEXT:</label>
             <input type="text" id="state" value="Playing BlockSity RP">
         </div>
         
         <div class="form-group">
-            <label for="details">Description:</label>
+            <label for="details">DESCRIPTION:</label>
             <input type="text" id="details" value="discord.gg/R9NVsy6dyx">
         </div>
         
-        <button onclick="updateConfig()">UPDATE CONFIGURATION</button>
+        <button onclick="saveConfig()">💾 SAVE CONFIG</button>
 
         <script id="rp-config" type="application/json">
             {
@@ -149,25 +118,25 @@
         </script>
         
         <script>
-            function updateConfig() {
+            function saveConfig() {
                 const config = {
-                    id: "1330086295401267301",
-                    state: document.getElementById('state').value,
-                    details: document.getElementById('details').value,
-                    large_image: "blocksity",
-                    large_text: "BlockSity RP",
-                    small_image: "discord",
-                    small_text: "Join our Discord!",
-                    buttons: [
+                    "id": "1330086295401267301",
+                    "state": document.getElementById('state').value,
+                    "details": document.getElementById('details').value,
+                    "large_image": "blocksity",
+                    "large_text": "BlockSity RP",
+                    "small_image": "discord",
+                    "small_text": "Join our Discord!",
+                    "buttons": [
                         {
-                            label: "Discord Server",
-                            url: "https://discord.gg/R9NVsy6dyx"
+                            "label": "Discord Server",
+                            "url": "https://discord.gg/R9NVsy6dyx"
                         }
                     ]
                 };
                 
-                document.getElementById('rp-config').textContent = JSON.stringify(config, null, 2);
-                alert('Configuration updated! All clients will update within 10 seconds.');
+                document.getElementById('rp-config').textContent = JSON.stringify(config);
+                alert('✅ Config saved! Applications will update within 10 seconds.');
             }
         </script>
     </div>
