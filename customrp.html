@@ -12,92 +12,114 @@
         
         body {
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background: var(--dark);
             color: white;
             font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
+            overflow: hidden;
         }
         
         .container {
             background: var(--light);
-            padding: 30px;
-            border-radius: 15px;
-            width: 100%;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
             max-width: 600px;
-            box-shadow: 0 0 30px rgba(0, 184, 255, 0.2);
-            animation: pulse 6s infinite;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 184, 255, 0.3);
+            animation: glow 8s infinite alternate;
         }
         
-        @keyframes pulse {
-            0% { box-shadow: 0 0 30px rgba(0, 184, 255, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(136, 50, 168, 0.4); }
-            100% { box-shadow: 0 0 30px rgba(0, 184, 255, 0.2); }
+        @keyframes glow {
+            0% { box-shadow: 0 0 40px rgba(0, 184, 255, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(136, 50, 168, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(0, 184, 255, 0.3); }
         }
         
         h1 {
             color: var(--primary);
-            text-align: center;
             margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px rgba(0, 184, 255, 0.5);
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--primary);
-        }
-        
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid rgba(0, 184, 255, 0.3);
-            border-radius: 8px;
+        .config-item {
+            margin: 20px 0;
+            padding: 15px;
             background: rgba(0, 0, 0, 0.2);
-            color: white;
-            font-size: 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
         }
         
-        button {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
+        .config-label {
+            color: var(--primary);
             font-weight: bold;
-            width: 100%;
-            margin-top: 20px;
-            transition: all 0.3s;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
         }
         
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 184, 255, 0.4);
+        .config-value {
+            color: white;
+            font-size: 1rem;
+            word-break: break-all;
+        }
+        
+        .note {
+            margin-top: 30px;
+            color: #777;
+            font-style: italic;
+        }
+        
+        .floating {
+            animation: floating 5s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔧 BLOCKSITY RP CONFIG</h1>
+    <div class="container floating">
+        <h1>BLOCKSITY RP CONFIG</h1>
         
-        <div class="form-group">
-            <label for="state">STATUS TEXT:</label>
-            <input type="text" id="state" value="Playing BlockSity RP">
+        <div class="config-item">
+            <div class="config-label">Application ID</div>
+            <div class="config-value">1330086295401267301</div>
         </div>
         
-        <div class="form-group">
-            <label for="details">DESCRIPTION:</label>
-            <input type="text" id="details" value="discord.gg/R9NVsy6dyx">
+        <div class="config-item">
+            <div class="config-label">Status Text</div>
+            <div class="config-value">Playing BlockSity RP</div>
         </div>
         
-        <button onclick="saveConfig()">💾 SAVE CONFIG</button>
+        <div class="config-item">
+            <div class="config-label">Description</div>
+            <div class="config-value">discord.gg/R9NVsy6dyx</div>
+        </div>
+        
+        <div class="config-item">
+            <div class="config-label">Large Image</div>
+            <div class="config-value">blocksity</div>
+        </div>
+        
+        <div class="config-item">
+            <div class="config-label">Small Image</div>
+            <div class="config-value">discord</div>
+        </div>
+        
+        <div class="config-item">
+            <div class="config-label">Button</div>
+            <div class="config-value">Discord Server (https://discord.gg/R9NVsy6dyx)</div>
+        </div>
+        
+        <p class="note">Edit configuration via GitHub repository only</p>
 
         <script id="rp-config" type="application/json">
             {
@@ -114,29 +136,6 @@
                         "url": "https://discord.gg/R9NVsy6dyx"
                     }
                 ]
-            }
-        </script>
-        
-        <script>
-            function saveConfig() {
-                const config = {
-                    "id": "1330086295401267301",
-                    "state": document.getElementById('state').value,
-                    "details": document.getElementById('details').value,
-                    "large_image": "blocksity",
-                    "large_text": "BlockSity RP",
-                    "small_image": "discord",
-                    "small_text": "Join our Discord!",
-                    "buttons": [
-                        {
-                            "label": "Discord Server",
-                            "url": "https://discord.gg/R9NVsy6dyx"
-                        }
-                    ]
-                };
-                
-                document.getElementById('rp-config').textContent = JSON.stringify(config);
-                alert('✅ Config saved! Applications will update within 10 seconds.');
             }
         </script>
     </div>
