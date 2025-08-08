@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocksity RP Updater</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e1e2e, #8832a8);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(30, 30, 46, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: pulse 5s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px rgba(136, 50, 168, 0.5); }
+            100% { box-shadow: 0 0 30px rgba(0, 184, 255, 0.7); }
+        }
+        
+        h1 {
+            color: #ff9e64;
+            text-shadow: 0 0 10px rgba(255, 158, 100, 0.5);
+        }
+        
+        .form-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00b8ff;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #8832a8;
+            border-radius: 5px;
+            background-color: #2a2a3c;
+            color: white;
+        }
+        
+        button {
+            background: linear-gradient(to right, #e64553, #8832a8);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(230, 69, 83, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BLOCKSITY RP CONFIG</h1>
+        
+        <div class="form-group">
+            <label for="details">Status Message:</label>
+            <input type="text" id="details" value="discord.gg/R9NVsy6dyx">
+        </div>
+        
+        <div class="form-group">
+            <label for="state">Custom State:</label>
+            <input type="text" id="state" placeholder="Optional status text">
+        </div>
+        
+        <button onclick="updateConfig()">UPDATE CONFIG</button>
+        
+        <script id="rp-config" type="application/json">
+            {
+                "id": "1330086295401267301",
+                "type": "playing",
+                "details": "discord.gg/R9NVsy6dyx",
+                "large_image": "https://blocksity-updater.vercel.app/blocksity.png",
+                "small_image": "https://blocksity-updater.vercel.app/discord.png",
+                "buttons": [
+                    {
+                        "label": "Discord Server",
+                        "url": "https://discord.gg/R9NVsy6dyx"
+                    }
+                ]
+            }
+        </script>
+        
+        <script>
+            function updateConfig() {
+                const config = {
+                    id: "1330086295401267301",
+                    type: "playing",
+                    details: document.getElementById('details').value,
+                    state: document.getElementById('state').value,
+                    large_image: "https://blocksity-updater.vercel.app/blocksity.png",
+                    small_image: "https://blocksity-updater.vercel.app/discord.png",
+                    buttons: [
+                        {
+                            label: "Discord Server",
+                            url: "https://discord.gg/R9NVsy6dyx"
+                        }
+                    ]
+                };
+                
+                document.getElementById('rp-config').textContent = JSON.stringify(config, null, 2);
+                alert('Config updated successfully! All clients will update within 30 seconds.');
+            }
+        </script>
+    </div>
+</body>
+</html>
